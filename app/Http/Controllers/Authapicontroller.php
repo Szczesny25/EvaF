@@ -19,8 +19,8 @@ class AuthApiController extends Controller
             content: new OA\JsonContent(
                 required: ['correo', 'contraseña'],
                 properties: [
-                    new OA\Property(property: 'correo', type: 'string', example: 'admin@ventasfix.cl'),
-                    new OA\Property(property: 'contraseña', type: 'string', example: 'Admin123'),
+                    new OA\Property(property: 'correo', type: 'string', example: 'elmas@camito.c'),
+                    new OA\Property(property: 'contraseña', type: 'string', example: 'Papaya123'),
                 ]
             )
         ),

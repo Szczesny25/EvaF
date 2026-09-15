@@ -9,7 +9,7 @@
     <form method="POST" action="{{ route('clientes.guardar') }}">
         @csrf
 
-        <x-molecules.campo-formulario name="rut_empresa" label="Rut empresa" />
+        <x-molecules.campo-formulario name="rut_empr" label="Rut empresa" />
 
         <x-molecules.campo-select name="rubro" label="Rubro">
             <option value="">Selecciona un rubro</option>
@@ -22,7 +22,7 @@
         <x-molecules.campo-formulario name="telefono" label="Teléfono" />
         <x-molecules.campo-formulario name="direccion" label="Dirección" />
         <x-molecules.campo-formulario name="nombre_contacto" label="Nombre de contacto" />
-        <x-molecules.campo-formulario name="email_contacto" label="Correo de contacto" type="email" />
+        <x-molecules.campo-formulario name="correo_contacto" label="Correo de contacto" type="email" />
 
         <div class="flex gap-2 mt-4">
             <x-atoms.boton tipo="submit">Guardar</x-atoms.boton>

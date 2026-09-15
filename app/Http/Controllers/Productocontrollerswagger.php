@@ -103,6 +103,23 @@ class ProductoControllerSwagger extends Controller
         parameters: [
             new OA\Parameter(name: 'producto', in: 'path', required: true, schema: new OA\Schema(type: 'integer')),
         ],
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ['sku', 'nombre', 'descr_corta', 'descr_larga', 'precio_neto', 'stock_actual', 'stock_minimo', 'stock_bajo', 'stock_alto'],
+                properties: [
+                    new OA\Property(property: 'sku', type: 'string', example: 'PROD-001'),
+                    new OA\Property(property: 'nombre', type: 'string', example: 'Mouse inalámbrico'),
+                    new OA\Property(property: 'descr_corta', type: 'string', example: 'Mouse ergonómico'),
+                    new OA\Property(property: 'descr_larga', type: 'string', example: 'Mouse inalámbrico con diseño ergonómico'),
+                    new OA\Property(property: 'precio_neto', type: 'integer', example: 10000),
+                    new OA\Property(property: 'stock_actual', type: 'integer', example: 50),
+                    new OA\Property(property: 'stock_minimo', type: 'integer', example: 5),
+                    new OA\Property(property: 'stock_bajo', type: 'integer', example: 10),
+                    new OA\Property(property: 'stock_alto', type: 'integer', example: 100),
+                ]
+            )
+        ),
         responses: [
             new OA\Response(response: 200, description: 'se actualizo, bien ahi'),
             new OA\Response(response: 404, description: 'no esta'),

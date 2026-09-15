@@ -23,6 +23,11 @@
             Clientes
         </a>
 
+        <a href="{{ url('/api/documentation') }}" target="_blank"
+           class="block px-3 py-2 rounded hover:bg-gray-700">
+            API (Swagger) 
+        </a>
+
         <form method="POST" action="{{ route('logout') }}" class="pt-4">
             @csrf
             <button type="submit" class="block w-full text-left px-3 py-2 rounded hover:bg-gray-700 text-red-300">

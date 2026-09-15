@@ -23,16 +23,14 @@ class ClienteController extends Controller
     public function guardar(Request $request)
     {
         $datos = $request->validate([
-            'rut_empresa' => ['required', 'string', 'max:12', 'unique:clientes,rut_empresa'],
+            'rut_empr' => ['required', 'string', 'regex:/^\d{7,8}-[0-9kK]$/', 'unique:clientes,rut_empr'],
             'rubro' => ['required', Rule::in(Cliente::RUBROS)],
             'razon_social' => ['required', 'string', 'max:150'],
             'telefono' => ['required', 'string', 'max:20'],
-            'direccion' => ['required', 'string', 'max:255'],
-            'nombre_contacto' => ['required', 'string', 'max:150'],
+            'direccion' => ['required', 'string', 'max:150'],
+            'nombre_contacto' => ['required', 'string', 'min:2', 'max:100'],
             'correo_contacto' => [
-                'required',
-                'string',
-                'max:150',
+                'required', 'string', 'max:150',
                 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             ],
         ], [
@@ -51,20 +49,19 @@ class ClienteController extends Controller
 
     public function actualizar(Request $request, Cliente $cliente)
     {
-        $datos = $request->validate([
-            'rut_empresa' => ['required', 'string', 'max:12', Rule::unique('clientes', 'rut_empresa')->ignore($cliente->id)],
+       $datos = $request->validate([
+            'rut_empr' => ['required', 'string', 'regex:/^\d{7,8}-[0-9kK]$/', Rule::unique('clientes', 'rut_empr')->ignore($cliente->id)],
             'rubro' => ['required', Rule::in(Cliente::RUBROS)],
             'razon_social' => ['required', 'string', 'max:150'],
             'telefono' => ['required', 'string', 'max:20'],
-            'direccion' => ['required', 'string', 'max:255'],
-            'nombre_contacto' => ['required', 'string', 'max:150'],
+            'direccion' => ['required', 'string', 'max:150'],
+            'nombre_contacto' => ['required', 'string', 'min:2', 'max:100'],
             'correo_contacto' => [
-                'required',
-                'string',
-                'max:150',
+                'required', 'string', 'max:150',
                 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             ],
         ], [
+            'rut_empr.regex' => 'coloque el rut bien pue',
             'correo_contacto.regex' => 'Profe que si lo hice, que eta ves no',
         ]);
 

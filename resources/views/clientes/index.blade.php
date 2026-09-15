@@ -24,10 +24,10 @@
         <tbody>
             @forelse ($clientes as $cliente)
                 <tr class="border-t">
-                    <td class="px-4 py-2">{{ $cliente->rut_empresa }}</td>
+                    <td class="px-4 py-2">{{ $cliente->rut_empr }}</td>
                     <td class="px-4 py-2">{{ $cliente->razon_social }}</td>
                     <td class="px-4 py-2">{{ ucfirst($cliente->rubro) }}</td>
-                    <td class="px-4 py-2">{{ $cliente->nombre_contacto }} ({{ $cliente->email_contacto }})</td>
+                    <td class="px-4 py-2">{{ $cliente->nombre_contacto }} ({{ $cliente->correo_contacto }})</td>
                     <td class="px-4 py-2 text-right space-x-2">
                         <a href="{{ route('clientes.editar', $cliente) }}" class="text-blue-600 hover:underline">Editar</a>
 

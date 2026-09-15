@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ClienteController;
@@ -8,9 +9,15 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
+Route::get('/registro', [AuthController::class, 'mostrarRegistro'])->name('registro');
+Route::post('/registro', [AuthController::class, 'registrar']);
+
+Route::get('/login', [AuthController::class, 'mostrarLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware('jwt.web')->group(function () {
 

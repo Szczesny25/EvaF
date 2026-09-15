@@ -1,0 +1,675 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API",
+        "description": "api para ver el tema del coso delcoso sobre el cosito(es de comprar cosas)",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "/api",
+            "description": "LA api"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Autenticación"
+                ],
+                "summary": "ta weno el usuario",
+                "operationId": "69b6c5ec77892684cc0fad66a169149a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "correo",
+                                    "contraseña"
+                                ],
+                                "properties": {
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "admin@ventasfix.cl"
+                                    },
+                                    "contraseña": {
+                                        "type": "string",
+                                        "example": "Admin123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "toi dentro"
+                    },
+                    "401": {
+                        "description": "no, no ere ese"
+                    }
+                }
+            }
+        },
+        "/clientes": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Lista a los clientes(hola profe)",
+                "operationId": "154539290d4767d4b2fa5730decf1941",
+                "responses": {
+                    "200": {
+                        "description": "se listo todo bien (como esta)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Agrega un nuevo cliente. (coloque cosas como esta)",
+                "operationId": "2554d32d132ab0607fd2b3e89e47911b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rut_empresa",
+                                    "rubro",
+                                    "razon_social",
+                                    "telefono",
+                                    "direccion",
+                                    "nombre_contacto",
+                                    "email_contacto"
+                                ],
+                                "properties": {
+                                    "rut_empresa": {
+                                        "type": "string",
+                                        "example": "76123456-7"
+                                    },
+                                    "rubro": {
+                                        "type": "string",
+                                        "example": "retail"
+                                    },
+                                    "razon_social": {
+                                        "type": "string",
+                                        "example": "Comercial Ejemplo Ltda."
+                                    },
+                                    "telefono": {
+                                        "type": "string",
+                                        "example": "+56912345678"
+                                    },
+                                    "direccion": {
+                                        "type": "string",
+                                        "example": "Av. Siempre Viva 123"
+                                    },
+                                    "nombre_contacto": {
+                                        "type": "string",
+                                        "example": "María López"
+                                    },
+                                    "email_contacto": {
+                                        "type": "string",
+                                        "example": "maria@comercialejemplo.cl"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Cliente creado con éxito (pero me quede sin ideas)"
+                    },
+                    "422": {
+                        "description": "Error de validación (y aparte siento que ya repeti mucho)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/clientes/{cliente}": {
+            "get": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Obtiene un cliente ID (yo bien)",
+                "operationId": "7d8cc26d0134d372cea97c99fd7ca14d",
+                "parameters": [
+                    {
+                        "name": "cliente",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "obtenido con éxito (la verdad)"
+                    },
+                    "404": {
+                        "description": "no encontrado (en gran parte del codigo)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Actualiza un cliente por su ID.(una cosa)",
+                "operationId": "4a986d8c5549bbe0206255726d15b250",
+                "parameters": [
+                    {
+                        "name": "cliente",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cliente actualizado con éxito (cuando escribo cosas como)"
+                    },
+                    "404": {
+                        "description": "Cliente no encontrado(eta o pai)"
+                    },
+                    "422": {
+                        "description": "Error de validación(no es falta de ortografia)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Clientes"
+                ],
+                "summary": "Elimina un cliente por su ID.(asi que)",
+                "operationId": "463e28d55aacb1ead7172d869d62c7ba",
+                "parameters": [
+                    {
+                        "name": "cliente",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cliente eliminado con éxito(como quiero dejarlo solo para este swagger)"
+                    },
+                    "404": {
+                        "description": "Cliente no encontrado(si logra ver esto)"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/productos": {
+            "get": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "aqui esta el stuff",
+                "operationId": "3a39382d8e98e52fb91a8b609e5fa5cf",
+                "responses": {
+                    "200": {
+                        "description": "aqui eta"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "colocaciona otro item",
+                "operationId": "641a6c1bf6b879ce0fc741a5a063097b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "sku",
+                                    "nombre",
+                                    "descr_corta",
+                                    "descr_larga",
+                                    "precio_neto",
+                                    "stock_actual",
+                                    "stock_minimo",
+                                    "stock_bajo",
+                                    "stock_alto"
+                                ],
+                                "properties": {
+                                    "sku": {
+                                        "type": "string",
+                                        "example": "PROD-001"
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Mouse inalámbrico"
+                                    },
+                                    "descr_corta": {
+                                        "type": "string",
+                                        "example": "Mouse ergonómico"
+                                    },
+                                    "descr_larga": {
+                                        "type": "string",
+                                        "example": "Mouse inalámbrico asi terrible epico con colores apra mas aerodinamismo"
+                                    },
+                                    "precio_neto": {
+                                        "type": "integer",
+                                        "example": 10000
+                                    },
+                                    "stock_actual": {
+                                        "type": "integer",
+                                        "example": 50
+                                    },
+                                    "stock_minimo": {
+                                        "type": "integer",
+                                        "example": 5
+                                    },
+                                    "stock_bajo": {
+                                        "type": "integer",
+                                        "example": 10
+                                    },
+                                    "stock_alto": {
+                                        "type": "integer",
+                                        "example": 100
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "ya esta"
+                    },
+                    "422": {
+                        "description": "no, no esta"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/productos/{producto}": {
+            "get": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "dame el id porfa",
+                "operationId": "063b2dd867f7761addcdd28de42e8a8d",
+                "parameters": [
+                    {
+                        "name": "producto",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "efectivamente, aqui esta"
+                    },
+                    "404": {
+                        "description": "este no eta"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "ya se actualizo(la verda profe me quede sin ideas de nuevo)",
+                "operationId": "a64b117e8e812eb1a7ee46d4217dd62d",
+                "parameters": [
+                    {
+                        "name": "producto",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "se actualizo, bien ahi"
+                    },
+                    "404": {
+                        "description": "no esta"
+                    },
+                    "422": {
+                        "description": "Error en algo"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Productos"
+                ],
+                "summary": "Elimina un producto por su ID.",
+                "operationId": "c5cf8998ae00a090239c668d97ebc0b2",
+                "parameters": [
+                    {
+                        "name": "producto",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Producto eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "Producto no encontrado"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/usuarios": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "todo lo pokemone",
+                "operationId": "6e8baa4c91af0d3c2642318b1d6167ce",
+                "responses": {
+                    "200": {
+                        "description": "aqui etan"
+                    },
+                    "401": {
+                        "description": "no eta"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "uno mas",
+                "operationId": "ad14be70e08e012e93c318b31aef94c9",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rut",
+                                    "nombre",
+                                    "apellido",
+                                    "correo",
+                                    "contraseña"
+                                ],
+                                "properties": {
+                                    "rut": {
+                                        "type": "string",
+                                        "example": "12345678-9"
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "Pérez"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "juan.perez@ventasfix.cl"
+                                    },
+                                    "contraseña": {
+                                        "type": "string",
+                                        "example": "Clave123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "spawneo el compa"
+                    },
+                    "422": {
+                        "description": "spawneo mal parece"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/usuarios/{usuario}": {
+            "get": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "dime tu edad y sabre que edad tienes",
+                "operationId": "5d9adbdba1510bf02c6b6e4e2ecc3186",
+                "parameters": [
+                    {
+                        "name": "usuario",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "aqui eta el chavo"
+                    },
+                    "404": {
+                        "description": "se perdio"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "tamo actualizando gratis",
+                "operationId": "c8c1c3ac9081879bd9fcbe30573e3cbc",
+                "parameters": [
+                    {
+                        "name": "usuario",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "rut",
+                                    "nombre",
+                                    "apellido",
+                                    "correo"
+                                ],
+                                "properties": {
+                                    "rut": {
+                                        "type": "string",
+                                        "example": "12345678-9"
+                                    },
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan"
+                                    },
+                                    "apellido": {
+                                        "type": "string",
+                                        "example": "Pérez"
+                                    },
+                                    "correo": {
+                                        "type": "string",
+                                        "example": "juan.perez@ventasfix.cl"
+                                    },
+                                    "contraseña": {
+                                        "type": "string",
+                                        "example": "(opcional) Clave123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ya tamo, vuelva nunca"
+                    },
+                    "404": {
+                        "description": "y ete quien e"
+                    },
+                    "422": {
+                        "description": "a nose que paso"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Usuarios"
+                ],
+                "summary": "aqui se expulsa del clan a la gente",
+                "operationId": "abf6ef762a79aba030e0275b3053691e",
+                "parameters": [
+                    {
+                        "name": "usuario",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "chau pai"
+                    },
+                    "404": {
+                        "description": "y ete quien e"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "description": "el token de segiruda",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Autenticación",
+            "description": "Autenticación"
+        },
+        {
+            "name": "Clientes",
+            "description": "Clientes"
+        },
+        {
+            "name": "Productos",
+            "description": "Productos"
+        },
+        {
+            "name": "Usuarios",
+            "description": "Usuarios"
+        }
+    ]
+}

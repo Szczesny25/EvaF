@@ -9,12 +9,16 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
-        <x-molecules.campo-formulario name="email" label="Correo" type="email" />
-        <x-molecules.campo-formulario name="password" label="Contraseña" type="password" />
+        <x-molecules.campo-formulario name="correo" label="Correo" type="email" />
+        <x-molecules.campo-formulario name="contraseña" label="Contraseña" type="password" />
 
         <x-atoms.boton tipo="submit" class="w-full mt-2">
             Ingresar
         </x-atoms.boton>
     </form>
+
+    <a href="{{ route('registro') }}" class="block mt-4 text-center text-sm text-blue-600 hover:underline">
+        create una cuantita que e grati!!
+    </a>
 </div>
 @endsection

@@ -24,9 +24,9 @@ class UsuarioController extends Controller
     public function guardar(Request $request)
     {
         $datos = $request->validate([
-            'rut' => ['required', 'string', 'max:12', 'unique:usuarios,rut'],
-            'nombre' => ['required', 'string', 'max:100'],
-            'apellido' => ['required', 'string', 'max:100'],
+            'rut' => ['required', 'string', 'regex:/^\d{7,8}-[0-9kK]$/', 'unique:usuarios,rut'],
+            'nombre' => ['required', 'string', 'min:2', 'max:100'],
+            'apellido' => ['required', 'string', 'min:2', 'max:100'],
             'correo' => [
                 'required',
                 'string',
@@ -54,9 +54,9 @@ class UsuarioController extends Controller
     public function actualizar(Request $request, Usuario $usuario)
     {
         $datos = $request->validate([
-            'rut' => ['required', 'string', 'max:12', Rule::unique('usuarios', 'rut')->ignore($usuario->id)],
-            'nombre' => ['required', 'string', 'max:100'],
-            'apellido' => ['required', 'string', 'max:100'],
+            'rut' => ['required', 'string', 'regex:/^\d{7,8}-[0-9kK]$/', Rule::unique('usuarios', 'rut')->ignore($usuario->id)],
+            'nombre' => ['required', 'string', 'min:2', 'max:100'],
+            'apellido' => ['required', 'string', 'min:2', 'max:100'],
             'correo' => [
                 'required',
                 'string',

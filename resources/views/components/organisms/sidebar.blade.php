@@ -1,3 +1,7 @@
+{{--
+    Organismo: sidebar
+    Navegación lateral básica. Para agregar más secciones, copia un <a> más.
+--}}
 <aside class="w-56 bg-gray-900 text-white min-h-screen p-4">
     <h2 class="text-lg font-bold mb-6">VentasFix</h2>
 

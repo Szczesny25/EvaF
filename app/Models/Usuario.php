@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
-class Usuario Extends Model
+class Usuario extends Model
 {
     use HasFactory;
 
-    protected $table = 'usuario';
+    protected $table = 'usuarios';
 
     protected $fillable = [
         'rut',
-        'nomrbe',
+        'nombre',
         'apellido',
         'correo',
         'contraseña',

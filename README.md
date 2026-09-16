@@ -1,58 +1,131 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# VentasFix - Microservicio de Manejo de Carro de Compra
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Backoffice + API para VentasFix, hecho en Laravel + Tailwind + MariaDB, con Atomic Design y autenticación JWT.
 
-## About Laravel
+## Requisitos previos
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- PHP 8.2 o superior
+- Composer
+- Node.js + npm
+- MariaDB (o MySQL) corriendo
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Pasos para levantar el proyecto
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Clonar el repositorio**
+   ```
+   git clone https://github.com/Szczesny25/EvaF.git
+   cd EvaF
+   ```
 
-## Learning Laravel
+2. **Instalar dependencias de PHP**
+   ```
+   composer install
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. **Copiar el archivo de entorno**
+   ```
+   cp .env.example .env        (Linux/Mac)
+   copy .env.example .env      (Windows)
+   ```
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+4. **Generar la llave de la aplicación**
+   ```
+   php artisan key:generate
+   ```
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+5. **Configurar la base de datos en el `.env`**
 
-## Agentic Development
+   Crea una base de datos vacía en MariaDB (ej. `db_evaf`) y completa estas variables:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=db_evaf
+   DB_USERNAME=tu_usuario
+   DB_PASSWORD=tu_clave
+   ```
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+6. **Correr las migraciones**
+   ```
+   php artisan migrate
+   ```
 
-```bash
-composer require laravel/boost --dev
+7. **Crear un usuario de prueba** (necesario para poder loguearse, ya que no hay usuarios por defecto)
+   ```
+   php artisan db:seed --class=UsuarioSeeder
+   ```
+   Esto crea el usuario:
+   - Correo: `admin@ventasfix.cl`
+   - Contraseña: `Admin123`
 
-php artisan boost:install
+   *(También puedes crear una cuenta nueva desde `/registro` una vez el sistema esté corriendo.)*
+
+8. **Enlazar el storage** (para que se vean las imágenes de productos)
+   ```
+   php artisan storage:link
+   ```
+
+9. **Instalar dependencias de frontend y compilar Tailwind**
+   ```
+   npm install
+   npm run build
+   ```
+
+10. **Instalar y generar la documentación de Swagger**
+    ```
+    composer require darkaonline/l5-swagger
+    php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+    php artisan l5-swagger:generate
+    ```
+
+11. **Levantar el servidor**
+    ```
+    php artisan serve
+    ```
+
+## Accesos
+
+| Recurso | URL |
+|---|---|
+| Backoffice (login) | http://127.0.0.1:8000/login |
+| Documentación Swagger (API) | http://127.0.0.1:8000/api/documentation |
+
+## Flujo de la API
+
+1. Autenticarse en `POST /api/login` con `correo` y `contraseña` → devuelve un token JWT.
+2. Usar ese token en el header `Authorization: Bearer {token}` para el resto de los endpoints (`/api/usuarios`, `/api/productos`, `/api/clientes`).
+3. En Swagger, esto se hace con el botón **Authorize** (arriba a la derecha), pegando el token ahí.
+
+## Estructura del proyecto (Atomic Design)
+
+```
+resources/views/
+├── layouts/          → app.blade.php (backoffice), invitado.blade.php (login/registro)
+├── components/
+│   ├── atoms/        → boton, input, label, select
+│   ├── molecules/    → campo-formulario, campo-select
+│   └── organisms/    → sidebar
+├── auth/             → login, registro
+├── usuarios/         → index, crear, editar
+├── productos/        → index, crear, editar
+├── clientes/         → index, crear, editar
+└── dashboard.blade.php
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+## Módulos implementados
 
-## Contributing
+- ✅ CRUD de Usuarios (con registro público y cifrado de contraseña)
+- ✅ CRUD de Productos (con cálculo automático de precio con IVA e imagen)
+- ✅ CRUD de Clientes
+- ✅ Dashboard con conteo de usuarios/productos/clientes
+- ✅ Autenticación JWT (backoffice vía sesión, API vía Bearer token)
+- ✅ API REST documentada con Swagger
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Problemas comunes
 
-## Code of Conduct
+- **Error de conexión a la base de datos:** revisa que las credenciales del `.env` coincidan con un usuario real creado en MariaDB.
+- **Las imágenes de productos no se ven:** asegúrate de haber corrido `php artisan storage:link`.
+- **Swagger no muestra los endpoints:** corre `php artisan l5-swagger:generate` de nuevo después de cualquier cambio en las anotaciones.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+---
+Desarrollado por Andre — Instituto Profesional San Sebastián.
